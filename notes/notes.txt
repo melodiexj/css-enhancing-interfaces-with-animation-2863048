@@ -1,0 +1,84 @@
+CSS Rendering pipeline:
+  style -> layout -> paint -> composite
+  - check out: https://csstriggers.com/
+
+Best Practices
+  - when animating, ideally only affect composite layer
+  - modern browsers can animate transforms and opacity cheaply
+    - other properties cause browser to perform new layout or paint (more expensive)
+  - accessibility concerns
+    - vestibule system: sensory info processing + spatial orientation
+      --> dizziness, nausea, ...
+    - consider:
+      - size of motion: small > big
+        - ex. parallax scrolling can be problematic
+      - give users control
+        - scrolljacking takes ctrl from users -> disorienting
+      - use CSS prop: prefers-reduced-motion
+        - detects if system has setting to minimize nonessential motion
+
+12 Principles of Animation
+  - from Disney, 'The Illusion of Life: Disney Animation book'
+  1. Squash and stretch
+    - irl, objects change shape as they interact with env
+    - ex. bouncing ball: upon contact with ground, ball squashes shape, but stretches as it leaves ground to jump back up
+    - idea: dropdown, mobile menu, zooming in
+  2. Anticipation
+    - small actions lead to larger ones
+    - ex. athlete -preparing- to sprint(?)
+    - idea: redirects(?)
+  3. Staging
+    - presentation of idea, draw attention to things of importance
+    - idea: loading screen (esp when customized)
+  4. Straight-ahead action + Pose to pose
+    - straight-ahead: draw animated element frame by frame, start to end
+    - pose to pose: have beginning frame, a few middle frames, and ending frame
+    - pose to pose more common on web
+      - define start state, end state, and keyframes
+  5. Follow-through and overlapping action
+    - main mass of object stops, but rest continues to move to catch up
+    - idea: consider how mult components on screen relate and perhaps animate those of same "group" together
+  6. Slow In and Slow Out
+    - objects don't move in linear fashion, at const speed
+    - idea: easings
+  7. Arc
+    - objects don't move in straight line, but in a bit of a curve
+    - used heavily in animation, not so much on web
+  8. Secondary Actions
+    - support main action
+    - idea: highlight main action, change icons, change text, change color on button
+  9. Timing
+    - affect perception and look of animation
+    - idea: consider easing, timing, sequencing of events
+  10. Exaggeration
+    - showcase creativity; can be fun and unexpected
+    - idea: for more fun brands, draw attention
+  11. Solid Drawing
+    - relates to 3D space, form, perspective, anatomy, and other aspects of obj
+  12. + Appeal
+    - combines many principles to make animation interesting + believable
+
+Animation choreography
+  - (Google's material design) relates to coordinated motion that holds user's focus while interface adapts
+  - motion on web should feel natural + have focused intent
+  :=
+    1. sequencing + easing
+      - sequencing: order designated to diff parts of animation
+        - outgoing vs incoming vs persistent elements (UI)
+      - easing: help elems move more natural (less mechanical)
+        - built-in options in CSS:
+          - linear
+          - ease-in: start slow, gradually accelerate
+          - ease-out: start fast, gradually decelerate
+            - good for incoming elems
+          - ease-in-out: start slow, speed up, slow down at end
+          - cubic bezier: custom curve-defining function
+            - curve defined by 4 points -> cubic function
+            - common effect: smooth down start and end of motion
+            - sometimes called easing functions
+    2. transformations
+      - specific animation of transitioning element
+      - ex. CSS transform properties
+        - common: rotate, skew, translate, scale
+    3. focal elements
+      - focal elem in transition is persistent elem that is significatnt to overall hierarchy of elem in transition
